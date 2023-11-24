@@ -363,7 +363,6 @@ def main():
     # Get and set the IDs for the villagers
     # We need to know which IDs to look for when searching for their houses
     villagers = getVillagerIDs()
-    print(villagers)
     
     # Keep track of which acre we're in
     x = 0
