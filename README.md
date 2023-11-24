@@ -2,7 +2,7 @@ If you run into any bugs or want to request a feature, feel free to open an issu
 
 # Usage
 1a. Have python 3.11+ and install/update the following modules: dolphin_memory_engine, PIL, pathlib
-1b. Clone this repo
+1b. Download the latest release or clone the repo
 2. Run "run.bat" after the train sequence has started at the beginning of the game
 3. The image "preview.jpg" will be saved in the repo's root folder
 
