@@ -7,9 +7,9 @@ If you run into any bugs or want to request a feature, feel free to open an issu
 4. The image "preview.jpg" will be saved in the repo's root folder
 
 # Credits
-Thanks to all contributors of the Animal Crossing data megasheet
-Thanks to Phil for their resources and answering any questions
-Thanks to contributors of the ACSE project (https://github.com/Cuyler36/ACSE)
+- Thanks to all contributors of the Animal Crossing data megasheet
+- Thanks to Phil for their resources and answering any questions
+- Thanks to contributors of the ACSE project (https://github.com/Cuyler36/ACSE)
 
 # Example Output
 - D = Dump
