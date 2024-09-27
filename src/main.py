@@ -48,12 +48,8 @@ def getVillagerIDs() -> list:
 
     for address in villager_ids:
         id = dme.read_bytes(address, 2)
-        # Format, adding zero if needed
-        # Make into a list to replace the first character
         formatted = list((format(id[0], 'x') + format(id[1], 'x').zfill(2)).upper())
-        # Set to house ID
         formatted[0] = '5'
-        # Back to string
         output.append("".join(formatted))
     
     return output
@@ -61,23 +57,19 @@ def getVillagerIDs() -> list:
 
 def getAcreID(bytes : list) -> str:
 
-    # Format first byte
     output = '0' + format(bytes[0], 'x')
 
     # Acre values change depending on its height
     # We subtract %4 from the second byte to account for this
     offset = bytes[1] % 4
 
-    # Format second byte and add zero if needed
     formatted = format(bytes[1] - offset, 'x').upper()
     formatted = formatted.zfill(2)
     
-    # Combine for the full ID and return
     return output + formatted
 
 
 def main():
-    # Make sure dolphin and Animal Crossing are running
     dme.hook()
     dme.assert_hooked()
 
@@ -85,14 +77,11 @@ def main():
     size_x = 256
     size_y = 256
 
-    # Create new image for the map
     map_preview = Image.new('RGB', (5*size_x, 6*size_y), (250, 250, 250))
 
-    # Keep track of which acre we're in
     x = 0
     y = 0
 
-    # Build the base map
     for a in acre_ids:
         id = getAcreID(dme.read_bytes(a, 2))
         image = Image.open(sys.argv[2] + id + '.jpg')
@@ -136,24 +125,18 @@ def main():
             map_preview.paste(image, (x*size_x, y*size_y), image)
 
         x += 1
-        # We're working with a 5x6 grid
-        # When we place the 5th image in a row, move to the next row
         if x % 5 == 0:
             y += 1
             x = 0
 
-    # Get and set the IDs for the villagers
-    # We need to know which IDs to look for when searching for their houses
     villagers = getVillagerIDs()
     
-    # Keep track of which acre we're in
     x = 0
     y = 0
 
     # Find and overlay villager houses
     for a in acre_tile_ids:
 
-        # Track which tile we're on
         tile_x = 1
         tile_y = 1
 
@@ -162,29 +145,23 @@ def main():
 
             id = getTileID(dme.read_bytes(a + i, 2))
 
-            # Check if ID matches a villager
             if id in villagers:
-                # Make sure house is not in an A acre
                 if y > 0:
                     villagers.remove(id)
                     image = Image.open(sys.argv[2] + 'VillagerHouse.png')
 
-                    # Offset for house image takes into account acre, tile, and house image size (64x64)
                     map_preview.paste(image, (x*size_x + tile_x*16 - 32, y*size_y + tile_y*16 - 32), image)
 
-            # Tile addresses go from left to right, top to bottom
             tile_x += 1
             if tile_x % 17 == 0:
                 tile_y += 1
                 tile_x = 1
         
-        # Acre tracking
         x += 1
         if x % 5 == 0:
             y += 1
             x = 0
 
-    # Output image
     path = Path(sys.argv[1] + "\preview.jpg")
     map_preview.save(path, "JPEG")
     map_preview.show()
