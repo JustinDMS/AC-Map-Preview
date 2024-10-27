@@ -1,5 +1,5 @@
 import dolphin_memory_engine as dme
-from PIL import Image
+from PIL import Image, ImageDraw
 from pathlib import Path
 import sys
 
@@ -161,6 +161,15 @@ def main():
         if x % 5 == 0:
             y += 1
             x = 0
+
+    # Draw acre lines
+    draw = ImageDraw.Draw(map_preview)
+    line_width = 2
+    line_color = (255, 0, 0, 255)
+    for i in range(1, 5):
+        draw.line([(size_x * i, 0), (size_x * i, 6*size_y)], width=line_width, fill=line_color)
+    for i in range(1, 6):
+        draw.line([(0, size_y * i), (6*size_x, size_y * i)], width=line_width, fill=line_color)
 
     path = Path(sys.argv[1] + "\preview.jpg")
     map_preview.save(path, "JPEG")
