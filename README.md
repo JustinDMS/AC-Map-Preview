@@ -1,17 +1,27 @@
-If you run into any bugs or want to request a feature, feel free to open an issue
+# Animal Crossing (2002) Map Previewer
 
-# Usage
-1. Have python 3.11+ and install/update the following modules: dolphin_memory_engine, Pillow, pathlib
-2. Download the latest release or clone the repo
-3. Run "run.bat" after the train sequence has started
-4. The image "preview.jpg" will be saved in the root folder
+Constructs a full overhead map of your Animal Crossing town.
 
-# Credits
- - Thanks to all contributors of the Animal Crossing data megasheet
- - Thanks to Phil for their resources and answering any questions
- - Thanks to Cuyler and contributors of the ACSE project (https://github.com/Cuyler36/ACSE)
+## How it works
 
-# Example Output
+By utilizing [Dolphin Emulator](https://dolphin-emu.org/) along with the [Dolphin Memory Engine Library](https://github.com/randovania/py-dolphin-memory-engine), you can hook into the game's live memory to read and write values. 
+
+With the help of the [acre documentation](https://docs.google.com/spreadsheets/d/13sRAcj9YbP9_i-u0Kg6S7ycHbaOQx1jFG4lYLm2DJ4c/edit?gid=1901208090#gid=1901208090), it becomes a matter of mapping the acre's ID to an image. With a little math, we can create a base image at the correct size and overlay each acre's image at the appropriate offset. If the acre contains a special building, a marker is overlayed as well.
+
+Once we have the base town layout, it's time to search for the villagers' housing. While the villager IDs are static, their houses are placed more-or-less randomly in the game world, so we must find them. The game world is made up of a 5x6 grid of acres, with each acre being a 16x16 grid of tiles. We step through each tile until we find one that matches one of the villagers' ID, then overlay a marker.
+
+Finally, with a little more math, we draw lines to visualize acre borders and label each acre appropriately (A-F, 1-5).
+
+## Usage
+1. Create and activate venv: `python -m venv .venv` -> `.venv\Scripts\activate`
+2. Install dependencies: `pip install -r requirements.txt`
+3. Have Animal Crossing running on Dolphin
+4. Run `run.bat`
+
+## Credits
+- [ACSE project](https://github.com/Cuyler36/ACSE)
+
+## Example Output
 - D = Dump
 - N = Nook
 - PO = Post Office
@@ -20,4 +30,4 @@ If you run into any bugs or want to request a feature, feel free to open an issu
 - W = Wishing Well
 - A = Able Sisters
 
-![Example Image](src/example.jpg)
+![Example Image](assets/example.jpg)
