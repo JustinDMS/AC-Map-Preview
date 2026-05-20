@@ -5,9 +5,13 @@ from pathlib import Path
 
 
 def main():
+    # Make sure Dolphin is hooked
     dme.hook()
-    dme.assert_hooked()
-
+    while not dme.is_hooked():
+        print("Failed to hook dolphin")
+        input("Press Enter to try again...")
+        dme.hook()
+    
     SIZE_X = 256 # Images are 256x256
     SIZE_Y = 256
     COLOR = (255, 200, 0, 255)
