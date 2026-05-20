@@ -1,5 +1,5 @@
 import dolphin_memory_engine as dme
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from pathlib import Path
 import sys
 
@@ -165,11 +165,22 @@ def main():
     # Draw acre lines
     draw = ImageDraw.Draw(map_preview)
     line_width = 2
-    line_color = (255, 0, 0, 255)
+    line_color = (255, 200, 0, 255)
     for i in range(1, 5):
         draw.line([(size_x * i, 0), (size_x * i, 6*size_y)], width=line_width, fill=line_color)
     for i in range(1, 6):
         draw.line([(0, size_y * i), (6*size_x, size_y * i)], width=line_width, fill=line_color)
+
+    # Draw acre numbers
+    draw = ImageDraw.Draw(map_preview)
+    _font = ImageFont.load_default(24)
+    acre_letters = ["A-", "B-", "C-", "D-", "E-", "F-"]
+    offset_x = 45
+    offset_y = 30
+    for i in range(1, 7):
+        acre_text = acre_letters[i - 1]
+        for j in range(1, 6):
+            draw.text(((size_x * j) - offset_x, (size_y * i) - offset_y), text=(acre_text + str(j)), font=_font, fill=line_color, align='right',)
 
     path = Path(sys.argv[1] + "\preview.jpg")
     map_preview.save(path, "JPEG")
