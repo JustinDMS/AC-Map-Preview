@@ -13,10 +13,11 @@ Once we have the base town layout, it's time to search for the villagers' housin
 Finally, with a little more math, we draw lines to visualize acre borders and label each acre appropriately (A-F, 1-5).
 
 ## Usage
-1. Create and activate venv: `python -m venv .venv` -> `.venv\Scripts\activate`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Have Animal Crossing running on Dolphin
-4. Run `run.bat`
+1. Clone repo: `git clone https://github.com/JustinDMS/AC-Map-Preview.git`
+2. Create and activate venv: `python -m venv .venv` -> `.venv\Scripts\activate`
+3. Install dependencies: `pip install -r requirements.txt`
+4. Have Animal Crossing running on Dolphin
+5. Run `run.bat`
 
 ## Credits
 - [ACSE project](https://github.com/Cuyler36/ACSE)
