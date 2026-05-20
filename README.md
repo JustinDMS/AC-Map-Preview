@@ -15,7 +15,7 @@ Finally, with a little more math, we draw lines to visualize acre borders and la
 ## Usage
 1. Clone repo: `git clone https://github.com/JustinDMS/AC-Map-Preview.git`
 2. Create venv: `python -m venv .venv`
-3. Activate venv:  -> `.venv\Scripts\activate`
+3. Activate venv: `.venv\Scripts\activate`
 4. Install dependencies: `pip install -r requirements.txt`
 5. Have Animal Crossing running on Dolphin
 6. Run `run.bat`
